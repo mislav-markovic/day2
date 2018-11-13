@@ -11,7 +11,7 @@ array::array(int size, double value) : p_{new double[size]}, n_{size}
   std::fill_n(p_, size, value);
 }
 
-array::array(const array& other) : array(other.n_, other.at(0))
+array::array(const array& other) : array(other.n_, other.p_ != nullptr ? other.at(0) : 0)
 {
 }
 
@@ -40,14 +40,28 @@ double array::at(int index) const
 
 array& array::operator=(const array& other)
 {
-  if(this != &other)
+  if (this != &other)
   {
-    delete[] p_;    
+    delete[] p_;
     n_ = other.n_;
     p_ = new double[n_];
 
     std::fill_n(p_, n_, other.at(0));
-  };
+  }
 
+  return *this;
+}
+
+array& array::operator=(array&& other) noexcept
+{
+  if (this != &other)
+  {
+    delete[] p_;
+    p_ = other.p_;
+    n_ = other.n_;
+
+    other.p_ = nullptr;
+    other.n_ = 0;
+  }
   return *this;
 }

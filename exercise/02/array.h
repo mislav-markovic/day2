@@ -6,6 +6,7 @@ class array
 private:
   double* p_;
   int n_;
+
 public:
   array();
   array(int size, double value);
@@ -17,4 +18,5 @@ public:
   double at(int index) const;
 
   array& operator=(const array& other);
+  array& operator=(array&& other) noexcept;
 };
