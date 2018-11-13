@@ -69,6 +69,13 @@ namespace color_test
 
 		TEST_METHOD(test_conversion_colorref)
 		{
+      auto t1 = RGB(255, 0, 0);
+      auto t2 = RGB(0, 255, 0);
+      auto t3 = RGB(0, 0, 255);
+      auto t4 = RGB(255, 255, 255);
+      auto t5 = RGB(127, 127, 127);
+      long t6 = 255 * 0.5;
+
 			Assert::AreEqual(RGB(255,   0,   0), color( 1, 0, 0 ).get_color_ref());
 			Assert::AreEqual(RGB(  0, 255,   0), color( 0, 1, 0 ).get_color_ref());
 			Assert::AreEqual(RGB(  0,   0, 255), color( 0, 0, 1 ).get_color_ref());

@@ -2,3 +2,4 @@
 
 #include <SDKDDKVer.h>
 #include "CppUnitTest.h"
+#include <algorithm>
