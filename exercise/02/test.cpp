@@ -1,15 +1,11 @@
 #include "CppUnitTest.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-
 #include "array.h"
-
 TEST_CLASS(test_array)
 {
   const int size = 10;
   const double value = 1.5;
-
 public:
-
   TEST_METHOD(array_default_constructor)
   {
     array a;
@@ -20,8 +16,7 @@ public:
   {
     array a(size, value);
     Assert::AreEqual(size, a.size());
-    for (int i = 0; i < a.size(); ++i)
-      Assert::AreEqual(value, a.at(i));
+    for (int i = 0; i < a.size(); ++i) Assert::AreEqual(value, a.at(i));
   }
 
   TEST_METHOD(array_index_invalid_large)
@@ -44,8 +39,7 @@ public:
     array b;
     b = a;
     Assert::AreEqual(size, b.size());
-    for (int i = 0; i < b.size(); ++i)
-      Assert::AreEqual(value, b.at(i));
+    for (int i = 0; i < b.size(); ++i) Assert::AreEqual(value, b.at(i));
   }
 
   TEST_METHOD(array_copy_constructor)
@@ -53,17 +47,25 @@ public:
     array a(size, value);
     array b(a);
     Assert::AreEqual(size, b.size());
-    for (int i = 0; i < b.size(); ++i)
-      Assert::AreEqual(value, b.at(i));
+    for (int i = 0; i < b.size(); ++i) Assert::AreEqual(value, b.at(i));
   }
 
-  TEST_METHOD(array_move_constructor)
+  TEST_METHOD(array_move_assignment)
   {
     array a(size, value);
     array b = std::move(a);
     Assert::AreEqual(0, a.size());
     Assert::AreEqual(size, b.size());
-    for (int i = 0; i < b.size(); ++i)
-      Assert::AreEqual(value, b.at(i));
+    for (int i = 0; i < b.size(); ++i) Assert::AreEqual(value, b.at(i));
+  }
+
+  TEST_METHOD(array_move_constructor)
+  {
+    array a{size, value};
+    array b{std::move(a)};
+    Assert::AreEqual(size, b.size());
+    Assert::AreEqual(0, a.size());
+    Assert::ExpectException<std::out_of_range>([a]() { a.at(0); });
+    for (int i = 0; i < b.size(); ++i) Assert::AreEqual(value, b.at(i));
   }
 };
