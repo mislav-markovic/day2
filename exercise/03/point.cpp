@@ -26,15 +26,15 @@ bool point::operator<(const point& other) const
 
 bool point::operator>=(const point& other) const
 {
-	return !(*this < other);
+  return !(*this < other);
 }
 
 bool point::operator>(const point& other) const
 {
-	return !(*this < other || *this == other);
+  return !(*this < other || *this == other);
 }
 
 bool point::operator<=(const point& other) const
 {
-	return !(*this > other);
+  return !(*this > other);
 }
