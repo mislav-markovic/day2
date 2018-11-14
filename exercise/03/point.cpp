@@ -20,8 +20,7 @@ bool point::operator!=(const point& other) const
 
 bool point::operator<(const point& other) const
 {
-  if (x_ == other.x_) return y_ < other.y_;
-  return x_ < other.x_;
+  return x_ == other.x_ ? y_ < other.y_ : x_ < other.x_;
 }
 
 bool point::operator>=(const point& other) const

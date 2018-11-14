@@ -42,6 +42,7 @@ public:
     Assert::IsTrue(point(3, 4) >= point(2, 4));
     Assert::IsTrue(point(4, 3) >= point(3, 4));
     Assert::IsTrue(point(3, 4) >= point(3, 3));
+
   }
 
   TEST_METHOD(points_greater_than)
